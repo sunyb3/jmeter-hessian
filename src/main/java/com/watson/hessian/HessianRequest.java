@@ -7,7 +7,7 @@ import com.watson.hessian.utils.HttpClientPool;
 import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
 import org.apache.jmeter.samplers.SampleResult;
-
+import org.apache.jmeter.config.Arguments;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
@@ -64,4 +64,19 @@ public class HessianRequest extends AbstractJavaSamplerClient {
         super.setupTest(context);
         HttpClientPool.getInstance().init(500, 200);
     }
+    @Override
+    public void teardownTest(JavaSamplerContext javaSamplerContext) {
+
+    }
+    @Override
+    public Arguments getDefaultParameters() {
+//        添加参数，并赋予默认值
+        Arguments arguments = new Arguments();
+        arguments.addArgument("remoteUrl","");
+        arguments.addArgument("remoteMethod", "");
+        arguments.addArgument("jsonParam", "");
+        arguments.addArgument("note", "");
+        return arguments;
+    }
+
 }
